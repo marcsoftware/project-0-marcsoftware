@@ -1,6 +1,7 @@
 
 package com.revature;
 import java.util.Scanner;  // Import the Scanner class
+import com.revature.bank.*;
 /**
  * This is the interface that the customer will use.
  *
