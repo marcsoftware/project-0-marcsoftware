@@ -11,6 +11,9 @@ Insert project description here.
 # Instructions
 Insert environment, build, and execution documentation here.
 >mvn install
+
 >mvn compile
+
 >mvn exec:java -Dexec.mainClass="com.example.MakeTable"
+
 >mvn clean
