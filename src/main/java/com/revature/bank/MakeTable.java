@@ -2,7 +2,7 @@ package com.revature.bank;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class PostgreSQLJDBC {
+public class MakeTable {
    public static void main(String args[]) {
       Connection c = null;
       try {
