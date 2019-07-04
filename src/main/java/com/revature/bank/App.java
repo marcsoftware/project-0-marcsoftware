@@ -19,6 +19,8 @@ public class App {
         System.out.println("enter password(must be at least 4 charecters long):"); 
         String userPassword = myObj.nextLine(); 
         System.out.println("password is: " + userPassword);
+
+        myObj =null;
         
     }
 }

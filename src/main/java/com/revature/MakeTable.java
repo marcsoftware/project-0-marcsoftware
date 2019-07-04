@@ -1,6 +1,7 @@
-package com.revature.bank;
+package com.revature;
 import java.sql.Connection;
 import java.sql.DriverManager;
+
 
 public class MakeTable {
    public static void main(String args[]) {
