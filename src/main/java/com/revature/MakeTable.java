@@ -9,6 +9,7 @@ class MakeTable{
       System.out.println("-------------------------------------------------------");
       System.out.println("-------------------------------------------------------");
       System.out.println("-------------------------------------------------------");
+<<<<<<< HEAD
    try{  
       //mvn install:install-file -Dfile=c:/db/postgresql-42.2.6.jar -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=14.2.6 -Dpackaging=jar
       Connection con=DriverManager.getConnection(   "jdbc:postgresql://localhost:5232/test?user=postgre&password=none");  
@@ -23,10 +24,18 @@ class MakeTable{
       System.out.println(e);}  
    }  
 
+
+
    
    System.out.println("-------------------------------------------------------");
    System.out.println("-------------------------------------------------------");
    System.out.println("-------------------------------------------------------");
    System.out.println("-------------------------------------------------------");
    System.out.println("-------------------------------------------------------");
+
 }  
+
+}  
+
+}
+
