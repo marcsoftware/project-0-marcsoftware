@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class Menu {
 
     public static void main(String[] args) {
-        // Prints "Hello, World" to the terminal window.
+        
+        clearScreen(); // for consistancy
         System.out.println("---CLI---");
 
         Scanner reader = new Scanner(System.in);  
@@ -13,9 +14,36 @@ public class Menu {
         while(!s.equals("exit")){
             System.out.print("> ");
             s = reader.nextLine(); 
-            
+            parseInput(s);
         }
         reader.close();
     }
+
+
+    public static void parseInput(String cmd){
+        
+
+        
+        switch (cmd) {
+            case "clear":
+                clearScreen();
+                break;
+            
+            case "exit":
+                
+                break;
+            default:
+                System.out.println("command not found: "+cmd);
+        }
+        
+
+
+    }
+
+
+    public static void clearScreen() {  
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+
+                            "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    } 
 
 }
