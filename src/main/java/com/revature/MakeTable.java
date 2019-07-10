@@ -16,7 +16,7 @@ class MakeTable{
                 System.out.println("Failed to make connection!");
             }
 
-
+            conn.close();
             
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
@@ -33,20 +33,25 @@ class MakeTable{
     public static void printTable(Connection conn){
         System.out.println("printing table.");
         String query = "select * from test";
-         
+        Statement stmt; 
         try{
-            Statement stmt;
+            
             stmt = conn.createStatement(); 
             
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
 
             System.out.println("done printing table.");
+            stmt.close();
+            rs.close();
+            
         }catch(Exception  e){
             System.err.format("ERROR: \n%s", e.getMessage());
         }finally{
-
+            
         }
+
+        System.exit(0);
     }
 } 
 
