@@ -51,7 +51,7 @@ class MakeTable{
             
         }
 
-        System.exit(0);
+        System.exit(0); // added for maven
     }
 } 
 
