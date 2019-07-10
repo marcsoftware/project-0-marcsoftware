@@ -37,14 +37,20 @@ class MakeTable{
         try{
             
             stmt = conn.createStatement(); 
-            
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
 
-            System.out.println("done printing table.");
+            System.out.println("META:"+rsmd);
+           
+            
+            while (rs.next()) {
+                String year = rs.getString("year");
+                System.out.println(year + "\n");
+            }
+
             stmt.close();
             rs.close();
-            
+
         }catch(Exception  e){
             System.err.format("ERROR: \n%s", e.getMessage());
         }finally{
