@@ -8,4 +8,4 @@ mimics banking function
 
 > mvn install:install-file -Dfile=d:/projects/ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=19.3 -Dpackaging=jar
  
-> java -cp 'target/classes' com.revature.HelloWorld
+> java -cp 'target/classes' com.revature.Menu
