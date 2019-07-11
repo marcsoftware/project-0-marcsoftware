@@ -1,8 +1,8 @@
 package com.revature;
 import java.util.Scanner;
-import com.revature.bank.GetTable;
+import com.revature.bank.DataManager;
 
-public class Menu {
+public class Interface {
 
     public static void main(String[] args) {
         
@@ -53,7 +53,7 @@ public class Menu {
     static void printTable(){
         System.out.println("printTable");
 
-        GetTable obj = new GetTable();
+        DataManager obj = new DataManager();
         obj.test();
     }
 

@@ -1,7 +1,7 @@
 package com.revature.bank;
 import java.sql.*;  
 
-public class GetTable{  
+public class DataManager{  
 //mvn install:install-file -Dfile=c:/db/postgresql-42.2.6.jar -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=14.2.6 -Dpackaging=jar
     public void test() {
 
