@@ -1,5 +1,6 @@
 package com.revature;
 import java.util.Scanner;
+import com.revature.bank.GetTable;
 
 public class Menu {
 
@@ -51,6 +52,9 @@ public class Menu {
 
     static void printTable(){
         System.out.println("printTable");
+
+        GetTable obj = new GetTable();
+        obj.test();
     }
 
 }

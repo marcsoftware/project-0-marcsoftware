@@ -1,9 +1,9 @@
-package com.revature;
+package com.revature.bank;
 import java.sql.*;  
 
-class GetTable{  
+public class GetTable{  
 //mvn install:install-file -Dfile=c:/db/postgresql-42.2.6.jar -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=14.2.6 -Dpackaging=jar
-    public static void main(String[] args) {
+    public void test() {
 
         // auto close connection
         try (Connection conn = DriverManager.getConnection(
@@ -30,7 +30,7 @@ class GetTable{
     }
 
 
-    public static void printTable(Connection conn){
+    public void printTable(Connection conn){
         System.out.println("printing table.");
         String query = "select * from test";
         Statement stmt; 
