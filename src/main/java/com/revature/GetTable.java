@@ -1,7 +1,7 @@
 package com.revature;
 import java.sql.*;  
 
-class MakeTable{  
+class GetTable{  
 //mvn install:install-file -Dfile=c:/db/postgresql-42.2.6.jar -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=14.2.6 -Dpackaging=jar
     public static void main(String[] args) {
 

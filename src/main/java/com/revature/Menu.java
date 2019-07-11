@@ -29,6 +29,9 @@ public class Menu {
                 clearScreen();
                 break;
             
+            case "print":
+                printTable();
+                break;
             case "exit":
                 
                 break;
@@ -41,9 +44,13 @@ public class Menu {
     }
 
 
-    public static void clearScreen() {  
+    static void clearScreen() {  
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+
                             "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     } 
+
+    static void printTable(){
+        System.out.println("printTable");
+    }
 
 }
