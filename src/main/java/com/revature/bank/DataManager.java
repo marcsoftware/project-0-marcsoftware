@@ -98,7 +98,39 @@ public class DataManager{
     }
 
     public void login(String username,String passowrd){
-        System.out.println("logged in as "+username);
+
+        String query = "select user_id from account where username='%s' and password='%s'"; //TODO change to prepared statment
+        query  = String.format(query, username,passowrd);
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            
+           
+            
+            if (rs.next()) {
+                
+                
+                String id = rs.getString("user_id");
+                System.out.println("logged in as "+username);
+                System.out.println("your id is: "+id);
+            }else{
+                System.out.println("username or password was incorrect.");
+            }
+
+            stmt.close();
+            rs.close();
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+
+        
 
     }
     
