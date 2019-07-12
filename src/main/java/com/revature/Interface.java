@@ -33,6 +33,10 @@ public class Interface {
             case "print":
                 printTable();
                 break;
+            
+            case "login":
+                login();
+                break;                
             case "exit":
                 System.exit(0); // added for maven
                 break;
@@ -56,6 +60,17 @@ public class Interface {
         DataManager obj = new DataManager();
         obj.printTable();
         System.out.println("________________________");
+    }
+
+    static void login(){
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.print:("Enter username: ");
+        String userName = myObj.nextLine();  // Read user input
+        
+
+        System.out.print("Enter password: ");
+        String password = myObj.nextLine();  // Read user input
+        
     }
 
 }
