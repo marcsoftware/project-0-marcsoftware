@@ -34,7 +34,7 @@ public class Interface {
                 printTable();
                 break;
             case "exit":
-                
+                System.exit(0); // added for maven
                 break;
             default:
                 System.out.println("command not found: "+cmd);
@@ -51,10 +51,11 @@ public class Interface {
     } 
 
     static void printTable(){
-        System.out.println("printTable");
+        System.out.println("________________________");
 
         DataManager obj = new DataManager();
         obj.printTable();
+        System.out.println("________________________");
     }
 
 }

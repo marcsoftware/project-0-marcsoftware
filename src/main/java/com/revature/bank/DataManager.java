@@ -13,7 +13,7 @@ public class DataManager{
                 "jdbc:postgresql://localhost:5432/test", "postgres", "none");
 
             if (conn != null) {
-                System.out.println("Connected to the database!");
+                
                 
             } else {
                 System.out.println("Failed to make connection!");
@@ -60,14 +60,14 @@ public class DataManager{
             
         }
 
-        System.exit(0); // added for maven
+        
     }
 
 
     
     public void printTable(){
-        System.out.println("printing table.");
-        String query = "select * from test";
+        
+        String query = "select * from account";
         Statement stmt; 
         try{
             
@@ -75,12 +75,14 @@ public class DataManager{
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
 
-            System.out.println("META:"+rsmd);
+            
            
             
             while (rs.next()) {
-                String year = rs.getString("year");
-                System.out.println(year + "\n");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String id = rs.getString("user_id");
+                System.out.println(id + "  "+username+"  "+password);
             }
 
             stmt.close();
@@ -92,7 +94,7 @@ public class DataManager{
             
         }
 
-        System.exit(0); // added for maven
+        
     }
     
 } 
