@@ -54,7 +54,7 @@ public class Interface {
         System.out.println("printTable");
 
         DataManager obj = new DataManager();
-        obj.test();
+        obj.printTable();
     }
 
 }
