@@ -1,6 +1,6 @@
-package com.revature;
+package com.revature.bank;
 import java.util.Scanner;
-import com.revature.bank.DataManager;
+
 
 public class Interface {
     
