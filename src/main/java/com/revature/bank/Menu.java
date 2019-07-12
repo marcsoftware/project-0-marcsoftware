@@ -2,11 +2,11 @@ package com.revature.bank;
 import java.util.Scanner;
 
 
-public class Interface {
+public class Menu {
     
     String login_name="";
 
-    public static void main(String[] args) {
+    public void displayCLI() {
     
 
         clearScreen(); // for consistancy
@@ -16,7 +16,7 @@ public class Interface {
         
         String s = "";
         while(!s.equals("exit")){
-            System.out.print("> ");
+            System.out.print(login_name+" > ");
             s = reader.nextLine(); 
             parseInput(s);
         }
@@ -24,7 +24,7 @@ public class Interface {
     }
 
 
-    public static  void parseInput(String cmd){
+    public   void parseInput(String cmd){
         
         //parse out args
         String[] args = cmd.split(" ");
@@ -55,12 +55,12 @@ public class Interface {
     }
 
 
-    static void clearScreen() {  
+     void clearScreen() {  
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+
                             "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     } 
 
-    static void printTable(){
+     void printTable(){
         System.out.println("________________________");
 
         DataManager obj = new DataManager();
@@ -81,7 +81,7 @@ public class Interface {
     @return the value returned by the method
     @throws what kind of exception does this method throw
     */
-    static void login(String[] args){
+     void login(String[] args){
         
         String username=null,password=null;
         if(args.length==1){
@@ -107,7 +107,7 @@ public class Interface {
         }
         
         DataManager obj = new DataManager();
-        obj.login(username,password);
+        this.login_name= obj.login(username,password);
         
     }
 
