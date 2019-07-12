@@ -96,6 +96,11 @@ public class DataManager{
 
         
     }
+
+    public void login(String username,String passowrd){
+        System.out.println("logged in as "+username);
+
+    }
     
 } 
 
