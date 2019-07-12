@@ -4,7 +4,7 @@ import com.revature.bank.DataManager;
 
 public class Interface {
     
-    
+    String login_name="";
 
     public static void main(String[] args) {
     
@@ -24,7 +24,7 @@ public class Interface {
     }
 
 
-    public static void parseInput(String cmd){
+    public static  void parseInput(String cmd){
         
         //parse out args
         String[] args = cmd.split(" ");

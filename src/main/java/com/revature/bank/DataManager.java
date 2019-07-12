@@ -4,6 +4,8 @@ import java.sql.*;
 public class DataManager{  
 
     Connection conn;
+
+    private String login_name=null;
     public DataManager() {
 
         // auto close connection
@@ -97,7 +99,7 @@ public class DataManager{
         
     }
 
-    public void login(String username,String passowrd){
+    public String login(String username,String passowrd){
 
         String query = "select user_id from account where username='%s' and password='%s'"; //TODO change to prepared statment
         query  = String.format(query, username,passowrd);
@@ -117,6 +119,7 @@ public class DataManager{
                 String id = rs.getString("user_id");
                 System.out.println("logged in as "+username);
                 System.out.println("your id is: "+id);
+                this.login_name=username;
             }else{
                 System.out.println("username or password was incorrect.");
             }
@@ -130,7 +133,7 @@ public class DataManager{
             
         }
 
-        
+        return username;
 
     }
     
