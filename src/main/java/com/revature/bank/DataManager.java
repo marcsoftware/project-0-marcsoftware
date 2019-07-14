@@ -99,10 +99,10 @@ public class DataManager{
         
     }
 
-    public String login(String username,String passowrd){
+    public String login(String username,String password){
 
         String query = "select user_id from account where username='%s' and password='%s'"; //TODO change to prepared statment
-        query  = String.format(query, username,passowrd);
+        query  = String.format(query, username,password);
         Statement stmt; 
         try{
             
@@ -138,25 +138,39 @@ public class DataManager{
     }
 
 
-    public String register(String username,String passowrd){
+    public void register(String username,String password){
         
         if(usernameExsists(username)){
-            System.out.println("found");
+            System.out.println("that username already exsists.");
+            return;
         }else{
-            System.out.println("notfound");
+            System.out.println("new user registered.");
         }
 
            
+        addNewUser(username,password);
 
+    }
+
+    public void addNewUser(String username,String password){
+        String query = " insert into account (username,password) values ('%s','%s');"; //TODO change to prepared statment
+        query  = String.format(query, username,password);
+        Statement stmt; 
+        try{
             
-           
+            stmt = conn.createStatement(); 
+            stmt.executeUpdate(query);
+    
+            stmt.close();
             
-                
-                
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+
         
-
-        return "";
-
     }
 
 

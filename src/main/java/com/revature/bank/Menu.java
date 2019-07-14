@@ -151,7 +151,7 @@ public class Menu {
         
         DataManager obj = new DataManager();
         
-        this.login_name= obj.register(username,password);
+        obj.register(username,password);
         
     }
 
