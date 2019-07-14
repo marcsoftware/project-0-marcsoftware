@@ -42,6 +42,9 @@ public class Menu {
             
             case "login":
                 login(args);
+                break; 
+            case "register":
+                register(args);
                 break;                
             case "exit":
                 System.exit(0); // added for maven
@@ -97,6 +100,7 @@ public class Menu {
             Scanner myObj = new Scanner(System.in);  
             System.out.print("Enter password: ");
             password = myObj.nextLine();  // Read user input
+            username=args[1];
             
         }
         
@@ -110,5 +114,46 @@ public class Menu {
         this.login_name= obj.login(username,password);
         
     }
+
+
+     /**
+    The Desciption of the method to explain what the method does
+    @param the parameters used by the method
+    @return the value returned by the method
+    @throws what kind of exception does this method throw
+    */
+    void register(String[] args){
+        
+        String username=null,password=null;
+        if(args.length==1){
+        
+            Scanner myObj = new Scanner(System.in);  
+            System.out.print("Enter desired username: ");
+            username = myObj.nextLine();  // Read user input
+            
+        }
+        
+        if(args.length==1 || args.length==2){
+            
+            Scanner myObj = new Scanner(System.in);  
+            System.out.print("Enter desired password: ");
+            password = myObj.nextLine();  // Read user input
+
+            username=args[1];
+            
+        }
+        
+        if(args.length==3){
+
+            username=args[1];
+            password=args[2];
+        }
+        
+        DataManager obj = new DataManager();
+        
+        this.login_name= obj.register(username,password);
+        
+    }
+
 
 }

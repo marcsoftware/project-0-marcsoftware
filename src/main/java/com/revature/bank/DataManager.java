@@ -35,7 +35,7 @@ public class DataManager{
     }
 
 
-    public void register(){
+    public void print(){
         System.out.println("printing table.");
         String query = "select * from test";
         Statement stmt; 
@@ -134,6 +134,67 @@ public class DataManager{
         }
 
         return username;
+
+    }
+
+
+    public String register(String username,String passowrd){
+        
+        if(usernameExsists(username)){
+            System.out.println("found");
+        }else{
+            System.out.println("notfound");
+        }
+
+           
+
+            
+           
+            
+                
+                
+        
+
+        return "";
+
+    }
+
+
+    public Boolean usernameExsists(String username){
+        boolean result=false;
+        String query = "select user_id from account where username='%s' "; //TODO change to prepared statment
+        query  = String.format(query, username);
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            
+           
+            
+            if (rs.next()) {
+                
+                
+                
+                
+                result=true;
+                //this.login_name=username;
+            }else{
+                //
+            }
+
+            stmt.close();
+            rs.close();
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+
+        return result;
 
     }
     
