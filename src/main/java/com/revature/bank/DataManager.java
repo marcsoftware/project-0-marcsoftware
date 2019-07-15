@@ -4,8 +4,10 @@ import java.sql.*;
 public class DataManager{  
 
     Connection conn;
+    String username="";
+    Object password;
 
-    private String login_name=null;
+    
     public DataManager() {
 
         // auto close connection
@@ -119,7 +121,9 @@ public class DataManager{
                 String id = rs.getString("user_id");
                 System.out.println("logged in as "+username);
                 System.out.println("your id is: "+id);
-                this.login_name=username;
+                
+                this.username = username;
+                this.password = password.toCharArray();
             }else{
                 System.out.println("username or password was incorrect.");
             }
@@ -138,12 +142,25 @@ public class DataManager{
     }
 
     public void logout(){
-        this.login_name="";
+        this.username="";
         
     }
 
     public void open(){
+        System.out.println(".........");
+        
+    }
+
+    public void apply(){
         System.out.println("apply to open new account.");
+        
+        //check if logged in
+        if(this.username.length()>0){
+
+            System.out.println("good you are logged in");
+        }else{
+            System.out.println("You must login before applying.");
+        }
         
     }
 

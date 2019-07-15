@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Menu {
     
-    String login_name="";
+    
     DataManager session;
 
     public void displayCLI() {
@@ -17,7 +17,7 @@ public class Menu {
         
         String s = "";
         while(!s.equals("exit")){
-            System.out.print(login_name+" > ");
+            System.out.print(session.username+" > ");
             s = reader.nextLine(); 
             parseInput(s);
         }
@@ -50,7 +50,10 @@ public class Menu {
                 break;
             case "open":
                 open();
-                break;    
+                break; 
+            case "apply":
+                apply();
+                break;       
             case "register":
                 register(args);
                 break;                
@@ -119,13 +122,13 @@ public class Menu {
         }
         
         
-        this.login_name= session.login(username,password);
+        session.login(username,password);
         
     }
 
     void logout(){
         
-        this.login_name=""; //refactor
+        
          session.logout();
     }
 
@@ -136,6 +139,13 @@ public class Menu {
         
          session.open();
     }
+
+    void apply(){
+
+        
+        
+        session.apply();
+   }
 
      /**
     The Desciption of the method to explain what the method does
