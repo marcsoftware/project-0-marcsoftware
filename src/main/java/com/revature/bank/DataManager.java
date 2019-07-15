@@ -141,6 +141,12 @@ public class DataManager{
         this.login_name="";
         
     }
+
+    public void open(){
+        System.out.println("apply to open new account.");
+        
+    }
+
     public void register(String username,String password){
         
         if(usernameExsists(username)){

@@ -1,0 +1,9 @@
+clear
+print
+login marc melcher
+register new user
+login marc wrongpassword
+register marc melcher 
+logout
+open
+exit

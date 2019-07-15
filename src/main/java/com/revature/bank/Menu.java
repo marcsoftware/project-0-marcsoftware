@@ -5,10 +5,11 @@ import java.util.Scanner;
 public class Menu {
     
     String login_name="";
+    DataManager session;
 
     public void displayCLI() {
     
-
+        session = new DataManager();
         clearScreen(); // for consistancy
         System.out.println("---CLI---");
 
@@ -47,6 +48,9 @@ public class Menu {
             case "logout":
                 logout();
                 break;
+            case "open":
+                open();
+                break;    
             case "register":
                 register(args);
                 break;                
@@ -70,8 +74,8 @@ public class Menu {
      void printTable(){
         System.out.println("________________________");
 
-        DataManager obj = new DataManager();
-        obj.printTable();
+        
+        session.printTable();
         System.out.println("________________________");
     }
 
@@ -114,15 +118,23 @@ public class Menu {
             password=args[2];
         }
         
-        DataManager obj = new DataManager();
-        this.login_name= obj.login(username,password);
+        
+        this.login_name= session.login(username,password);
         
     }
 
     void logout(){
-        DataManager obj = new DataManager();
+        
         this.login_name=""; //refactor
-         obj.logout();
+         session.logout();
+    }
+
+
+    void open(){
+
+        
+        
+         session.open();
     }
 
      /**
@@ -158,9 +170,9 @@ public class Menu {
             password=args[2];
         }
         
-        DataManager obj = new DataManager();
         
-        obj.register(username,password);
+        
+        session.register(username,password);
         
     }
 
