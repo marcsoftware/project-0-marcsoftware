@@ -43,6 +43,10 @@ public class Menu {
             case "login":
                 login(args);
                 break; 
+
+            case "logout":
+                logout();
+                break;
             case "register":
                 register(args);
                 break;                
@@ -115,6 +119,11 @@ public class Menu {
         
     }
 
+    void logout(){
+        DataManager obj = new DataManager();
+        this.login_name=""; //refactor
+         obj.logout();
+    }
 
      /**
     The Desciption of the method to explain what the method does

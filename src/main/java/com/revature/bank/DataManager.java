@@ -137,7 +137,10 @@ public class DataManager{
 
     }
 
-
+    public void logout(){
+        this.login_name="";
+        
+    }
     public void register(String username,String password){
         
         if(usernameExsists(username)){
