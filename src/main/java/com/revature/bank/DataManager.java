@@ -152,12 +152,12 @@ public class DataManager{
     }
 
     public void apply(){
-        System.out.println("apply to open new account.");
+        
         
         //check if logged in first
         if(this.username.length()>0){
 
-            System.out.println("good you are logged in");
+            
         }else{
             System.out.println("You must login before applying.");
             return;
@@ -171,18 +171,24 @@ public class DataManager{
         
         //if yes
         if(response.equals("y")){
-            System.out.println("Enter co-owner's username:");
+            System.out.print("Enter co-owner's username:");
 
             String co_username = myObj.nextLine(); 
 
-            System.out.println("Enter co-owner's password:");
+            System.out.print("Enter co-owner's password:");
 
             String co_password = myObj.nextLine(); 
 
             //TODO authenticate...
-
+            if(authenticate(co_username, co_password)){
+                //
+            }else{
+                System.out.println("wrong co-owner username or co-owner password.");
+                return;
+            }
             //
             addNewApplication(this.username,co_username);
+            System.out.println("Your application has been submitted.");
         }
         
     }
@@ -230,7 +236,7 @@ public class DataManager{
 
         
         query  = String.format(query, owner,coowner);
-        System.out.println(query);
+        
         Statement stmt; 
         try{
             
@@ -249,6 +255,43 @@ public class DataManager{
         
     }
 
+    public Boolean authenticate(String username,String password){
+        String query = "select user_id from account where username='%s' and password='%s'"; //TODO change to prepared statment
+        query  = String.format(query, username,password);
+        Statement stmt; 
+        Boolean result=false;
+        try{
+            
+            stmt = conn.createStatement(); 
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            
+           
+            
+            if (rs.next()) {
+                
+                
+                String id = rs.getString("user_id");
+                
+                result=true;
+                
+            }else{
+                result=false;
+            }
+
+            stmt.close();
+            rs.close();
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+
+        return result;
+
+    }
 
     public Boolean usernameExsists(String username){
         boolean result=false;
