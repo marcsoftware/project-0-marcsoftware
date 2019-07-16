@@ -1,6 +1,7 @@
 package com.revature.bank;
 import java.sql.*;  
 import java.util.*;
+import java.util.Arrays;
 public class DataManager{  
 
     Connection conn;
@@ -114,7 +115,14 @@ public class DataManager{
             return;
         }
         String app_id=args[1];
+        
+        int beg = 1, end = args.length;
+		String[] list_ids = new String[end - beg];
+		System.arraycopy(args, beg, list_ids, 0, list_ids.length);
+        System.out.println("--------"+list_ids[list_ids.length-1]);
 
+        //TODO for mat list_ids into (1,2,3)
+        
         String query= "UPDATE applications "+
         "SET status = 'denied' "+
         "WHERE app_id ='%s';";                
