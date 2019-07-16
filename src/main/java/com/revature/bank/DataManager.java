@@ -1,6 +1,6 @@
 package com.revature.bank;
 import java.sql.*;  
-
+import java.util.*;
 public class DataManager{  
 
     Connection conn;
@@ -154,12 +154,35 @@ public class DataManager{
     public void apply(){
         System.out.println("apply to open new account.");
         
-        //check if logged in
+        //check if logged in first
         if(this.username.length()>0){
 
             System.out.println("good you are logged in");
         }else{
             System.out.println("You must login before applying.");
+            return;
+        }
+
+        //is this a joint account application?
+        Scanner myObj = new Scanner(System.in);  
+        System.out.println("Is this for a joint account?(y/n):");
+
+        String response = myObj.nextLine(); 
+        
+        //if yes
+        if(response.equals("y")){
+            System.out.println("Enter co-owner's username:");
+
+            String co_username = myObj.nextLine(); 
+
+            System.out.println("Enter co-owner's password:");
+
+            String co_password = myObj.nextLine(); 
+
+            //TODO authenticate...
+
+            //
+            addNewApplication(this.username,co_username);
         }
         
     }
@@ -173,6 +196,7 @@ public class DataManager{
             System.out.println("new user registered.");
         }
 
+
            
         addNewUser(username,password);
 
@@ -181,6 +205,32 @@ public class DataManager{
     public void addNewUser(String username,String password){
         String query = " insert into account (username,password) values ('%s','%s');"; //TODO change to prepared statment
         query  = String.format(query, username,password);
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            stmt.executeUpdate(query);
+    
+            stmt.close();
+            
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+
+        
+    }
+
+    public void addNewApplication(String owner,String coowner){
+        String query= "INSERT INTO applications(owner_id,coowner_id) VALUES "+
+                      "  ((SELECT user_id FROM account WHERE username='%s'),"+
+                      " (SELECT user_id FROM account  WHERE username='%s'));";                
+
+        
+        query  = String.format(query, owner,coowner);
+        System.out.println(query);
         Statement stmt; 
         try{
             
