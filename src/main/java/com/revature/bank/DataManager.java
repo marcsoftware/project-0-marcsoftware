@@ -119,16 +119,25 @@ public class DataManager{
         int beg = 1, end = args.length;
 		String[] list_ids = new String[end - beg];
 		System.arraycopy(args, beg, list_ids, 0, list_ids.length);
-        System.out.println("--------"+list_ids[list_ids.length-1]);
+        
+
 
         //TODO for mat list_ids into (1,2,3)
+        String formated_list="";
+        String template= "'%s',";
+        for(int i=0;i<list_ids.length;i++){
+              
+            formated_list+= String.format(template, list_ids[i]);
+
+        }
+        formated_list = formated_list.substring(0, formated_list.length() - 1); //delete the last comma
         
         String query= "UPDATE applications "+
         "SET status = 'denied' "+
-        "WHERE app_id ='%s';";                
+        "WHERE app_id IN (%s); ";                
 
         
-        query  = String.format(query, app_id);
+        query  = String.format(query, formated_list);
         
         Statement stmt; 
         try{
@@ -178,7 +187,7 @@ public class DataManager{
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
 
-            System.out.println("META:"+rsmd);
+            
            
             System.out.println("----------------------------------");
             while (rs.next()) {
