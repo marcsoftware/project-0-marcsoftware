@@ -1,7 +1,3 @@
-login marc melcher
-apply
+login admin admin
+printapps
 
-y 
-hank
-hill
-exit

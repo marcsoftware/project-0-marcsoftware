@@ -63,7 +63,7 @@ public class Menu {
             case "register":
                 register(args);
                 break;   
-            case "printApps":
+            case "printapps":
                 printApps();
                 break;                  
             case "exit":

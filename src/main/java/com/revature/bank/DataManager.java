@@ -5,7 +5,7 @@ public class DataManager{
 
     Connection conn;
     String username="";
-    Object password;
+    String password;
 
     
     public DataManager() {
@@ -110,6 +110,14 @@ public class DataManager{
     }
 
     public void printApps(){
+
+        Boolean hasPermission = checkPermission(this.username,this.password);
+        if(hasPermission){
+            System.out.println("you have permission.");
+        }else{
+            System.out.println("You must be a admin or employee to do this.");
+            return;
+        }
         System.out.println("called printApps()");
     }
 
@@ -135,7 +143,7 @@ public class DataManager{
                 System.out.println("your id is: "+id);
                 
                 this.username = username;
-                this.password = password.toCharArray();
+                this.password = password;
             }else{
                 System.out.println("username or password was incorrect.");
             }
@@ -330,6 +338,53 @@ public class DataManager{
             
         }
 
+        return result;
+
+    }
+
+
+    public Boolean checkPermission(String username,String password){
+
+
+        String query = "select status from account where username='%s' and password='%s'"; //TODO change to prepared statment
+        query  = String.format(query, username,password);
+        Statement stmt; 
+        Boolean result=false;
+        
+        try{
+            
+            stmt = conn.createStatement(); 
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            
+        
+            
+            if (rs.next()) {
+                
+                
+                String status = rs.getString("status");
+                System.out.println(status);
+                if(status.equals("admin") || status.equals("employee")){
+                    result=true;
+                }
+
+                
+                
+            }else{
+                result=false;
+                
+            }
+
+            stmt.close();
+            rs.close();
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+        
         return result;
 
     }
