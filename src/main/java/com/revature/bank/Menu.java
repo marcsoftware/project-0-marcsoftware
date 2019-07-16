@@ -53,7 +53,13 @@ public class Menu {
                 break; 
             case "apply":
                 apply();
-                break;       
+                break;  
+            case "approve":
+                approve();
+                break; 
+            case "reject":
+                reject();
+                break;              
             case "register":
                 register(args);
                 break;                
@@ -68,7 +74,13 @@ public class Menu {
 
     }
 
+    void approve(){
+        session.approve();
+    }
 
+    void reject(){
+        session.reject();
+    }
      void clearScreen() {  
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+
                             "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");

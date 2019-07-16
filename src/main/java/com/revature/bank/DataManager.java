@@ -101,6 +101,14 @@ public class DataManager{
         
     }
 
+    public void reject(){
+        System.out.println("called reject()");
+    }
+
+    public void approve(){
+        System.out.println("called approve()");
+    }
+
     public String login(String username,String password){
 
         String query = "select user_id from account where username='%s' and password='%s'"; //TODO change to prepared statment
@@ -188,9 +196,12 @@ public class DataManager{
             }
             //
             addNewApplication(this.username,co_username);
-            System.out.println("Your application has been submitted.");
+            
+        }else{
+            addNewApplication(this.username);
         }
         
+        System.out.println("Your application has been submitted.");
     }
 
     public void register(String username,String password){
@@ -236,6 +247,32 @@ public class DataManager{
 
         
         query  = String.format(query, owner,coowner);
+        
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            stmt.executeUpdate(query);
+    
+            stmt.close();
+            
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+
+        
+    }
+
+    //overloaded
+    public void addNewApplication(String owner){
+        String query= "INSERT INTO applications(owner_id) VALUES "+
+                      "  ((SELECT user_id FROM account WHERE username='%s'))";                
+
+        
+        query  = String.format(query, owner);
         
         Statement stmt; 
         try{
