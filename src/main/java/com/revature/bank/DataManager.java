@@ -101,11 +101,52 @@ public class DataManager{
         
     }
 
-    public void reject(){
-        System.out.println("called reject()");
+    public void reject(String[] args){
+        Boolean hasPermission = checkPermission(this.username,this.password);
+        if(hasPermission){
+            
+        }else{
+            System.out.println("You must be a admin or employee to do this.");
+            return;
+        }
+
+        if(args.length==1){
+            return;
+        }
+        String app_id=args[1];
+
+        String query= "UPDATE applications "+
+        "SET status = 'denied' "+
+        "WHERE app_id ='%s';";                
+
+        
+        query  = String.format(query, app_id);
+        
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            stmt.executeUpdate(query);
+    
+            stmt.close();
+            
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+
     }
 
     public void approve(){
+        Boolean hasPermission = checkPermission(this.username,this.password);
+        if(hasPermission){
+            
+        }else{
+            System.out.println("You must be a admin or employee to do this.");
+            return;
+        }
         System.out.println("called approve()");
     }
 
@@ -136,7 +177,8 @@ public class DataManager{
                 String id = rs.getString("app_id");
                 String coowner = rs.getString("coowner_id");
                 String owner = rs.getString("owner_id");
-                System.out.println(id+" : "+owner+" : "+coowner + "\n");
+                String status = rs.getString("status");
+                System.out.println(id+" : "+owner+" : "+coowner +" : "+status+ "\n");
             }
             System.out.println("----------------------------------");
             stmt.close();
@@ -394,7 +436,7 @@ public class DataManager{
                 
                 
                 String status = rs.getString("status");
-                System.out.println(status);
+                
                 if(status.equals("admin") || status.equals("employee")){
                     result=true;
                 }

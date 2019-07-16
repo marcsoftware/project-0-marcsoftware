@@ -58,7 +58,7 @@ public class Menu {
                 approve();
                 break; 
             case "reject":
-                reject();
+                reject(args);
                 break;              
             case "register":
                 register(args);
@@ -85,8 +85,8 @@ public class Menu {
         session.printApps();
     }
 
-    void reject(){
-        session.reject();
+    void reject(String[] args){
+        session.reject(args);
     }
      void clearScreen() {  
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+
