@@ -62,7 +62,10 @@ public class Menu {
                 break;              
             case "register":
                 register(args);
-                break;                
+                break;   
+            case "printApps":
+                printApps();
+                break;                  
             case "exit":
                 System.exit(0); // added for maven
                 break;
@@ -76,6 +79,10 @@ public class Menu {
 
     void approve(){
         session.approve();
+    }
+
+    void printApps(){
+        session.printApps();
     }
 
     void reject(){

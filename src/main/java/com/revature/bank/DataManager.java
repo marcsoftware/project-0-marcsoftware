@@ -109,6 +109,10 @@ public class DataManager{
         System.out.println("called approve()");
     }
 
+    public void printApps(){
+        System.out.println("called printApps()");
+    }
+
     public String login(String username,String password){
 
         String query = "select user_id from account where username='%s' and password='%s'"; //TODO change to prepared statment
