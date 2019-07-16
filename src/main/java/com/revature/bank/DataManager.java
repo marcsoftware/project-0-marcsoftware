@@ -133,8 +133,8 @@ public class DataManager{
         formated_list = formated_list.substring(0, formated_list.length() - 1); //delete the last comma
         
         String query= "UPDATE applications "+
-        "SET status = 'denied' "+
-        "WHERE app_id IN (%s); ";                
+        "SET status = 'rejected' "+
+        "WHERE app_id IN (%s) and status='pending'; ";                
 
         
         query  = String.format(query, formated_list);
@@ -188,7 +188,7 @@ public class DataManager{
         
         String query= "UPDATE applications "+
         "SET status = 'approved' "+
-        "WHERE app_id IN (%s); ";                
+        "WHERE app_id IN (%s) and status='pending' ; ";                
 
         
         query  = String.format(query, formated_list);
@@ -384,9 +384,9 @@ public class DataManager{
     }
 
     public void addNewApplication(String owner,String coowner){
-        String query= "INSERT INTO applications(owner_id,coowner_id) VALUES "+
+        String query= "INSERT INTO applications(owner_id,coowner_id,status) VALUES "+
                       "  ((SELECT user_id FROM account WHERE username='%s'),"+
-                      " (SELECT user_id FROM account  WHERE username='%s'));";                
+                      " (SELECT user_id FROM account  WHERE username='%s'),'pending');";                
 
         
         query  = String.format(query, owner,coowner);
@@ -411,8 +411,8 @@ public class DataManager{
 
     //overloaded
     public void addNewApplication(String owner){
-        String query= "INSERT INTO applications(owner_id) VALUES "+
-                      "  ((SELECT user_id FROM account WHERE username='%s'))";                
+        String query= "INSERT INTO applications(owner_id,status) VALUES "+
+                      "  ((SELECT user_id FROM account WHERE username='%s'),'pending')";                
 
         
         query  = String.format(query, owner);
