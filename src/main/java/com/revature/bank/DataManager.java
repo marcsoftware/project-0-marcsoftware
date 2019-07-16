@@ -169,7 +169,7 @@ public class DataManager{
 
         
         query = String.format(query, app_id);
-       // execute(query);
+       execute(query);
         
         //
         String max = getLastAccountNumber(); 
@@ -181,7 +181,7 @@ public class DataManager{
         query = String.format(query, new_account_number);
         execute(query);
 
-       // query= "insert into bank_owners(account_number,owner_id) values(%s,%s) ";        
+       
 
         query= "INSERT INTO bank_owners(account_number,owner_id) VALUES "+
                       "(  %s,"+
@@ -190,8 +190,22 @@ public class DataManager{
         query = String.format(query, new_account_number,app_id);
         execute(query);
 
- 
+        String coowner_id=getJointOwner(app_id);
+
+        if(coowner_id==null){
+            
+        }else{
+            query= "INSERT INTO bank_owners(account_number,owner_id) VALUES "+
+                      "( %s,%s);";    
+        
+        query = String.format(query, new_account_number,coowner_id);
+        execute(query);
+
+        
+        }
     }
+
+
 
     private String getLastAccountNumber(){
         String query = "SELECT MAX(account_number) FROM bank ;";
@@ -221,6 +235,38 @@ public class DataManager{
         return max;
         
     }
+
+
+    private String getJointOwner(String app_id){
+        String query = "SELECT coowner_id FROM applications where app_id='%s';";
+        String owner="";
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            query = String.format(query,app_id);
+            ResultSet rs = stmt.executeQuery(query);
+    
+            if (rs.next()) {
+                
+                owner = rs.getString("coowner_id");
+                
+            }
+
+            stmt.close();
+            
+            
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s\n", e.getMessage());
+        }finally{
+            
+        }
+
+        return owner;
+        
+    }
+
 
     private void execute(String query){
         

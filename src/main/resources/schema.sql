@@ -28,12 +28,7 @@ CREATE TABLE bank (
    
 ); 
 
-CREATE TABLE bank_owner (
-    account_number  SERIAL PRIMARY KEY,
-    owner_id int,
-    FOREIGN KEY (account_number) REFERENCES bank(account_number)
-   
-); 
+
 
   ALTER SEQUENCE bank_account_number_seq RESTART WITH 6000 INCREMENT BY 3;
 
