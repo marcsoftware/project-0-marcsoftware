@@ -23,17 +23,19 @@ CREATE TABLE applications (
 ); 
 
 CREATE TABLE bank (
-    account_number varchar(100) UNIQUE,
+    account_number  SERIAL PRIMARY KEY,
     balance DECIMAL(19,4)
    
 ); 
 
 CREATE TABLE bank_owner (
-    account_number varchar(100),
-   
-    owner varchar(100),
+    account_number  SERIAL PRIMARY KEY,
+    owner_id int,
     FOREIGN KEY (account_number) REFERENCES bank(account_number)
+   
 ); 
+
+  ALTER SEQUENCE bank_account_number_seq RESTART WITH 6000 INCREMENT BY 3;
 
 CREATE TABLE history (
     

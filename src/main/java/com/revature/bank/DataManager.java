@@ -60,7 +60,7 @@ public class DataManager{
             rs.close();
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -94,7 +94,7 @@ public class DataManager{
             rs.close();
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -149,7 +149,7 @@ public class DataManager{
             
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -172,15 +172,57 @@ public class DataManager{
         execute(query);
         
         //
-        String query= "UPDATE applications "+
-        "SET status = 'approved' "+
-        "WHERE app_id IN (%s) and status='pending'; ";        
+        String max = getLastAccountNumber();
 
         
-        query = String.format(query, app_id);
+        
+        int new_account_number=Integer.parseInt(max)+3;
+        //
+         query= "insert into bank(account_number,balance) values(%s,0) ";        
+
+        
+        query = String.format(query, new_account_number);
         execute(query);
 
+//        query= "insert into bank_owners(account_number,owner_id) values(%s,%s) ";        
+
+       // String query= "INSERT INTO applications(owner_id,coowner_id,status) VALUES "+
+        //              "  ((SELECT user_id FROM account WHERE username='%s'),"+
+         //             " (SELECT user_id FROM account  WHERE username='%s'),'pending');";    
+        
+  //      query = String.format(query, 'account_number','owner_id');
+   //     execute(query);
+
  
+    }
+
+    private String getLastAccountNumber(){
+        String query = "SELECT MAX(account_number) FROM bank ;";
+        String max="0";
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            ResultSet rs = stmt.executeQuery(query);
+    
+            if (rs.next()) {
+                
+                 max = rs.getString(1);
+                
+            }
+
+            stmt.close();
+            
+            
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s\n", e.getMessage());
+        }finally{
+            
+        }
+
+        return max;
+        
     }
 
     private void execute(String query){
@@ -196,7 +238,7 @@ public class DataManager{
             
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -256,7 +298,7 @@ public class DataManager{
             
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -297,7 +339,7 @@ public class DataManager{
             rs.close();
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -336,7 +378,7 @@ public class DataManager{
             rs.close();
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -428,7 +470,7 @@ public class DataManager{
             
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -454,7 +496,7 @@ public class DataManager{
             
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -480,7 +522,7 @@ public class DataManager{
             
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -517,7 +559,7 @@ public class DataManager{
             rs.close();
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -564,7 +606,7 @@ public class DataManager{
             rs.close();
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
@@ -602,7 +644,7 @@ public class DataManager{
             rs.close();
 
         }catch(Exception  e){
-            System.err.format("ERROR: \n%s", e.getMessage());
+            System.err.format("ERROR: \n%s\n", e.getMessage());
         }finally{
             
         }
