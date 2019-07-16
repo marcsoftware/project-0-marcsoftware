@@ -22,3 +22,20 @@ CREATE TABLE applications (
     FOREIGN KEY (coowner_id) REFERENCES account(user_id)
 ); 
 
+CREATE TABLE bank (
+    account_number varchar(100) UNIQUE,
+    balance DECIMAL(19,4)
+   
+); 
+
+CREATE TABLE bank_owner (
+    account_number varchar(100),
+   
+    owner varchar(100),
+    FOREIGN KEY (account_number) REFERENCES bank(account_number)
+); 
+
+CREATE TABLE history (
+    
+
+); 

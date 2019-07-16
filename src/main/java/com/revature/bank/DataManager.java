@@ -156,11 +156,57 @@ public class DataManager{
 
     }
 
-    public void approve(String[] args){
-        Boolean hasPermission = checkPermission(this.username,this.password);
-        if(hasPermission){
+    private void createBankAccounts(String app_id){
+        
+        if(!checkPermission(this.username,this.password)){
+            System.out.println("You must be a admin or employee to do this.");
+            return;
+        }
+
+        String query= "UPDATE applications "+
+        "SET status = 'approved' "+
+        "WHERE app_id IN (%s) and status='pending'; ";        
+
+        
+        query = String.format(query, app_id);
+        execute(query);
+        
+        //
+        String query= "UPDATE applications "+
+        "SET status = 'approved' "+
+        "WHERE app_id IN (%s) and status='pending'; ";        
+
+        
+        query = String.format(query, app_id);
+        execute(query);
+
+ 
+    }
+
+    private void execute(String query){
+        
+        
+        Statement stmt; 
+        try{
             
-        }else{
+            stmt = conn.createStatement(); 
+            stmt.executeUpdate(query);
+    
+            stmt.close();
+            
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+
+
+    }
+
+    public void approve(String[] args){
+        
+        if(!checkPermission(this.username,this.password)){
             System.out.println("You must be a admin or employee to do this.");
             return;
         }
@@ -186,8 +232,7 @@ public class DataManager{
         }
         formated_list = formated_list.substring(0, formated_list.length() - 1); //delete the last comma
         
-        String query= "UPDATE applications "+
-        "SET status = 'approved' "+
+        String query= "select * from applications "+
         "WHERE app_id IN (%s) and status='pending' ; ";                
 
         
@@ -197,8 +242,16 @@ public class DataManager{
         try{
             
             stmt = conn.createStatement(); 
-            stmt.executeUpdate(query);
-    
+            
+            ResultSet rs = stmt.executeQuery(query);
+            //
+            System.out.println("----------------------------------");
+            while (rs.next()) {
+                String id = rs.getString("app_id");
+                createBankAccounts(id);
+            }
+            //
+
             stmt.close();
             
 
