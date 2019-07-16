@@ -113,12 +113,42 @@ public class DataManager{
 
         Boolean hasPermission = checkPermission(this.username,this.password);
         if(hasPermission){
-            System.out.println("you have permission.");
+            
         }else{
             System.out.println("You must be a admin or employee to do this.");
             return;
         }
-        System.out.println("called printApps()");
+
+
+        
+        String query = "select * from applications";
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            System.out.println("META:"+rsmd);
+           
+            System.out.println("----------------------------------");
+            while (rs.next()) {
+                String id = rs.getString("app_id");
+                String coowner = rs.getString("coowner_id");
+                String owner = rs.getString("owner_id");
+                System.out.println(id+" : "+owner+" : "+coowner + "\n");
+            }
+            System.out.println("----------------------------------");
+            stmt.close();
+            rs.close();
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
+
+        
     }
 
     public String login(String username,String password){
