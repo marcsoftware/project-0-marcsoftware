@@ -169,29 +169,26 @@ public class DataManager{
 
         
         query = String.format(query, app_id);
-        execute(query);
+       // execute(query);
         
         //
-        String max = getLastAccountNumber();
-
-        
-        
+        String max = getLastAccountNumber(); 
         int new_account_number=Integer.parseInt(max)+3;
-        //
-         query= "insert into bank(account_number,balance) values(%s,0) ";        
+        
+        query= "insert into bank(account_number,balance) values(%s,0) ";        
 
         
         query = String.format(query, new_account_number);
         execute(query);
 
-//        query= "insert into bank_owners(account_number,owner_id) values(%s,%s) ";        
+       // query= "insert into bank_owners(account_number,owner_id) values(%s,%s) ";        
 
-       // String query= "INSERT INTO applications(owner_id,coowner_id,status) VALUES "+
-        //              "  ((SELECT user_id FROM account WHERE username='%s'),"+
-         //             " (SELECT user_id FROM account  WHERE username='%s'),'pending');";    
+        query= "INSERT INTO bank_owners(account_number,owner_id) VALUES "+
+                      "(  %s,"+
+                      " (SELECT owner_id FROM applications  WHERE app_id='%s'));";    
         
-  //      query = String.format(query, 'account_number','owner_id');
-   //     execute(query);
+        query = String.format(query, new_account_number,app_id);
+        execute(query);
 
  
     }
