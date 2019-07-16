@@ -156,7 +156,7 @@ public class DataManager{
 
     }
 
-    public void approve(){
+    public void approve(String[] args){
         Boolean hasPermission = checkPermission(this.username,this.password);
         if(hasPermission){
             
@@ -164,7 +164,49 @@ public class DataManager{
             System.out.println("You must be a admin or employee to do this.");
             return;
         }
-        System.out.println("called approve()");
+
+        if(args.length==1){
+            return;
+        }
+        String app_id=args[1];
+        
+        int beg = 1, end = args.length;
+		String[] list_ids = new String[end - beg];
+		System.arraycopy(args, beg, list_ids, 0, list_ids.length);
+        
+
+
+        //TODO for mat list_ids into (1,2,3)
+        String formated_list="";
+        String template= "'%s',";
+        for(int i=0;i<list_ids.length;i++){
+              
+            formated_list+= String.format(template, list_ids[i]);
+
+        }
+        formated_list = formated_list.substring(0, formated_list.length() - 1); //delete the last comma
+        
+        String query= "UPDATE applications "+
+        "SET status = 'approved' "+
+        "WHERE app_id IN (%s); ";                
+
+        
+        query  = String.format(query, formated_list);
+        
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            stmt.executeUpdate(query);
+    
+            stmt.close();
+            
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s", e.getMessage());
+        }finally{
+            
+        }
     }
 
     public void printApps(){

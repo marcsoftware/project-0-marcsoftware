@@ -55,7 +55,7 @@ public class Menu {
                 apply();
                 break;  
             case "approve":
-                approve();
+                approve(args);
                 break; 
             case "reject":
                 reject(args);
@@ -77,8 +77,8 @@ public class Menu {
 
     }
 
-    void approve(){
-        session.approve();
+    void approve(String[] args){
+        session.approve(args);
     }
 
     void printApps(){
