@@ -244,7 +244,7 @@ public class DataManager{
     String money = (args[2]);
      money = money.replace("-", ""); //assume that user want positive
     
-
+   
     if(isOwner(account_number)){
         
     }else{
@@ -252,6 +252,13 @@ public class DataManager{
         return; 
     }
 
+    String balance = getBalance(account_number);
+    float fBalance = Float.parseFloat(balance);
+    float fMoney = Float.parseFloat(money);
+    if(fMoney >= fBalance){
+        System.out.println("tansaction failed: insufficient funds");
+        return;
+    }
 
     String query= "UPDATE bank "+
         "SET balance = balance - %s "+
@@ -308,6 +315,52 @@ public class DataManager{
         return result;
         
    }
+
+   private String getBalance(String account_number){
+    String query= "select balance from bank where account_number='%s';";    
+
+    query = String.format(query, account_number);
+    
+    String result="0";
+    Statement stmt; 
+    
+
+    
+    try{
+        
+        stmt = conn.createStatement(); 
+        ResultSet rs = stmt.executeQuery(query);
+        ResultSetMetaData rsmd = rs.getMetaData();
+
+        
+    
+        
+        if (rs.next()) {
+            
+            
+           result=rs.getString("balance");    
+            
+    
+            
+            
+        }else{
+            result="0";
+            
+        }
+
+        stmt.close();
+        rs.close();
+
+    }catch(Exception  e){
+        System.err.format("ERROR: \n%s\n", e.getMessage());
+    }finally{
+        
+    }
+    
+    return result;
+    
+}
+
 
     private String getLastAccountNumber(){
         String query = "SELECT MAX(account_number) FROM bank ;";
