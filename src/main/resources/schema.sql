@@ -24,10 +24,15 @@ CREATE TABLE applications (
 
 CREATE TABLE bank (
     account_number  SERIAL PRIMARY KEY,
-    balance DECIMAL(19,4)
+    balance DECIMAL(19,2)
    
-); 
+);
 
+
+create table bank_owners{
+   account_number,
+   owner_id
+}
 
 
   ALTER SEQUENCE bank_account_number_seq RESTART WITH 6000 INCREMENT BY 3;

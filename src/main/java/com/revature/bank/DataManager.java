@@ -174,8 +174,13 @@ public class DataManager{
        execute(query);
         
         //
+        
         String max = getLastAccountNumber(); 
-        int new_account_number=Integer.parseInt(max)+3;
+        
+        if(max == "null"){
+            max="0";
+        }
+        int new_account_number=Integer.parseInt(max)+1003;
         
         query= "insert into bank(account_number,balance) values(%s,0) ";        
 
@@ -403,6 +408,8 @@ public class DataManager{
                 
                  max = rs.getString(1);
                 
+            }else{
+                max="0";
             }
 
             stmt.close();
@@ -482,6 +489,7 @@ public class DataManager{
             return;
         }
 
+        
         if(args.length==1){
             return;
         }
@@ -502,6 +510,7 @@ public class DataManager{
 
         }
         formated_list = formated_list.substring(0, formated_list.length() - 1); //delete the last comma
+   
         
         String query= "select * from applications "+
         "WHERE app_id IN (%s) and status='pending' ; ";                
@@ -519,7 +528,9 @@ public class DataManager{
             System.out.println("----------------------------------");
             while (rs.next()) {
                 String id = rs.getString("app_id");
+                
                 createBankAccounts(id);
+                
             }
             //
 
@@ -531,6 +542,8 @@ public class DataManager{
         }finally{
             
         }
+
+        System.out.println("END---------------.");
     }
 
     public void printApps(){
@@ -579,12 +592,21 @@ public class DataManager{
 
     public void listAccounts(){
 
-        String query = "select * from bank_owners where owner_id='%s';";
+        //String query = "select * from bank_owners where owner_id='%s';";
+
+        String query = "SELECT * "+
+                       "FROM bank_owners "+
+                       "INNER JOIN bank "+
+                       "ON bank.account_number = bank_owners.account_number "+
+                       "where owner_id='%s' ;";
+
+                      
         Statement stmt; 
         try{
             
             stmt = conn.createStatement(); 
             query  = String.format(query, this.id);
+            
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
 
@@ -596,7 +618,8 @@ public class DataManager{
                 
                 
                 String account_number = rs.getString("account_number");
-                System.out.println(account_number+" : "+  "\n");
+                String balance = rs.getString("balance");
+                System.out.println(account_number+" : "+balance+ "\n");
             }
             System.out.println("----------------------------------");
             stmt.close();
