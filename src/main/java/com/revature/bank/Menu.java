@@ -11,7 +11,7 @@ public class Menu {
     
         session = new DataManager();
         clearScreen(); // for consistancy
-        System.out.println("---CLI---");
+     
 
         Scanner reader = new Scanner(System.in);  
         
