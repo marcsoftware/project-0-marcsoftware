@@ -3,6 +3,10 @@ import java.sql.*;
 import java.util.*;
 import java.util.Arrays;
 import java.util.regex.*;  
+import java.security.*;
+import java.math.BigInteger;
+
+
 
 public class DataManager{  
 
@@ -41,6 +45,9 @@ public class DataManager{
 
 
     public void print(){
+
+     
+
         System.out.println("printing table.");
         String query = "select * from test";
         Statement stmt; 
@@ -73,7 +80,12 @@ public class DataManager{
 
     
     public void printTable(){
-        
+      
+        if(!checkPermission(this.username,this.password)){
+            System.out.println("You must be a admin or employee to do this.");
+            return;
+        }
+
         String query = "select * from account";
         Statement stmt; 
         try{
@@ -637,6 +649,28 @@ public class DataManager{
 
     public String login(String username,String password){
 
+          //
+          String data = password;
+          
+          MessageDigest messageDigest;
+          try {
+              messageDigest = MessageDigest.getInstance("MD5");
+              messageDigest.update(data.getBytes());
+              byte[] messageDigestMD5 = messageDigest.digest();
+              StringBuffer stringBuffer = new StringBuffer();
+              for (byte bytes : messageDigestMD5) {
+                  stringBuffer.append(String.format("%02x", bytes & 0xff));
+              }
+   
+           //   System.out.println("data:" + data);
+            //  System.out.println("digestedMD5(hex):" + stringBuffer.toString());
+              password=stringBuffer.toString();
+          } catch (NoSuchAlgorithmException exception) {
+              // TODO Auto-generated catch block
+              exception.printStackTrace();
+          }
+          //
+
         String query = "select user_id from account where username='%s' and password='%s'"; //TODO change to prepared statment
         query  = String.format(query, username,password);
         Statement stmt; 
@@ -740,7 +774,27 @@ public class DataManager{
             System.out.println("new user registered.");
         }
 
-
+        //
+        String data = password;
+        
+        MessageDigest messageDigest;
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(data.getBytes());
+            byte[] messageDigestMD5 = messageDigest.digest();
+            StringBuffer stringBuffer = new StringBuffer();
+            for (byte bytes : messageDigestMD5) {
+                stringBuffer.append(String.format("%02x", bytes & 0xff));
+            }
+ 
+         //   System.out.println("data:" + data);
+          //  System.out.println("digestedMD5(hex):" + stringBuffer.toString());
+            password=stringBuffer.toString();
+        } catch (NoSuchAlgorithmException exception) {
+            // TODO Auto-generated catch block
+            exception.printStackTrace();
+        }
+        //
            
         addNewUser(username,password);
 
