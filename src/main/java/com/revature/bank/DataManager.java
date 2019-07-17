@@ -236,45 +236,68 @@ public class DataManager{
         
     }
 
-   
-   public void withdraw(String[] args){
-    if(args.length<3){
-        return; //not enough args
-    }
-
-    String account_number=(args[1]);
-    String money = (args[2]);
-     money = money.replace("-", ""); //assume that user want positive
-     
-     
-   
-
-    if(isOwner(account_number)){
+    public void transfer(String[] args){
+        if(args.length<4){
+            System.out.println("failed: you are missing args.");
+            return; //not enough args
+        }
+       
+        String from_account = args[1];
+        String to_account = args[2];
+        String amount = args[3];
+ 
         
-    }else{
-        System.out.println("You do not own account#: "+account_number);
-        return; 
-    }
+        args[2]=amount;
+        if(withdraw(args)){
 
-    String balance = getBalance(account_number);
-    float fBalance = Float.parseFloat(balance);
-    float fMoney = Float.parseFloat(money);
-    if(fMoney >= fBalance){
-        System.out.println("tansaction failed: insufficient funds");
-        return;
-    }
+        }else{
+            return; // 
+        }
 
-    String query= "UPDATE bank "+
-        "SET balance = balance - %.2f "+
-        "WHERE account_number='%s' ";        
-
+        args[1]=to_account;
         
-        //float fMoney = Float.parseFloat(money);
-        query = String.format(query,fMoney ,account_number);
-       execute(query);
+        deposit(args);
 
-    
-   }
+    }
+   
+   public boolean withdraw(String[] args){
+            if(args.length<3){
+                return false; //not enough args
+            }
+
+            String account_number=(args[1]);
+            String money = (args[2]);
+            money = money.replace("-", ""); //assume that user want positive
+            
+            
+        
+
+            if(isOwner(account_number)){
+                
+            }else{
+                System.out.println("You do not own account#: "+account_number);
+                return false; 
+            }
+
+            String balance = getBalance(account_number);
+            float fBalance = Float.parseFloat(balance);
+            float fMoney = Float.parseFloat(money);
+            if(fMoney >= fBalance){
+                System.out.println("tansaction failed: insufficient funds");
+                return false;
+            }
+
+            String query= "UPDATE bank "+
+                "SET balance = balance - %.2f "+
+                "WHERE account_number='%s' ";        
+
+                
+                //float fMoney = Float.parseFloat(money);
+                query = String.format(query,fMoney ,account_number);
+            execute(query);
+
+            return true;
+        }
 
 
    private boolean isOwner(String account_number){
