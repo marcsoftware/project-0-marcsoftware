@@ -6,8 +6,8 @@ public class DataManager{
 
     Connection conn;
     String username="";
-    String password;
-
+    String password="";
+    String id="";
     
     public DataManager() {
 
@@ -205,7 +205,109 @@ public class DataManager{
         }
     }
 
+   public void deposit(String[] args){
+    if(args.length<3){
+        return; //not enough args
+    }
 
+    String account_number=(args[1]);
+    String money = (args[2]);
+     money = money.replace("-", ""); //assume that user want positive
+    
+
+    if(isOwner(account_number)){
+        
+    }else{
+        System.out.println("You do not own account#: "+account_number);
+        return; 
+    }
+
+
+    String query= "UPDATE bank "+
+        "SET balance = balance +%s "+
+        "WHERE account_number='%s' ";        
+
+        
+        query = String.format(query,money ,account_number);
+       execute(query);
+
+    
+   }
+
+   
+   public void withdraw(String[] args){
+    if(args.length<3){
+        return; //not enough args
+    }
+
+    String account_number=(args[1]);
+    String money = (args[2]);
+     money = money.replace("-", ""); //assume that user want positive
+    
+
+    if(isOwner(account_number)){
+        
+    }else{
+        System.out.println("You do not own account#: "+account_number);
+        return; 
+    }
+
+
+    String query= "UPDATE bank "+
+        "SET balance = balance - %s "+
+        "WHERE account_number='%s' ";        
+
+        
+        query = String.format(query,money ,account_number);
+       execute(query);
+
+    
+   }
+
+
+   private boolean isOwner(String account_number){
+        String query= "select owner_id from bank_owners where owner_id='%s';";    
+
+        query = String.format(query, this.id);
+        
+        boolean result=false;
+        Statement stmt; 
+        
+        
+        try{
+            
+            stmt = conn.createStatement(); 
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            
+        
+            
+            if (rs.next()) {
+                
+                
+                
+                
+               result=true;
+                
+                
+            }else{
+                result=false;
+                
+            }
+
+            stmt.close();
+            rs.close();
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s\n", e.getMessage());
+        }finally{
+            
+        }
+        
+        return result;
+        
+   }
 
     private String getLastAccountNumber(){
         String query = "SELECT MAX(account_number) FROM bank ;";
@@ -288,6 +390,9 @@ public class DataManager{
 
 
     }
+
+
+    
 
     public void approve(String[] args){
         
@@ -413,6 +518,7 @@ public class DataManager{
                 
                 this.username = username;
                 this.password = password;
+                this.id=id;
             }else{
                 System.out.println("username or password was incorrect.");
             }

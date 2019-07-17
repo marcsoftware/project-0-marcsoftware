@@ -65,7 +65,13 @@ public class Menu {
                 break;   
             case "printapps":
                 printApps();
-                break;                  
+                break;
+            case "deposit":
+                deposit(args);
+                break; 
+            case "withdraw":
+                withdraw(args);
+                break;                           
             case "exit":
                 System.exit(0); // added for maven
                 break;
@@ -75,6 +81,14 @@ public class Menu {
         
 
 
+    }
+
+    public void deposit(String[] args){
+        session.deposit(args);
+    }
+
+    public void withdraw(String[] args){
+        session.withdraw(args);
     }
 
     void approve(String[] args){
