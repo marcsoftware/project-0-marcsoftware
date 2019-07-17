@@ -2,6 +2,8 @@ package com.revature.bank;
 import java.sql.*;  
 import java.util.*;
 import java.util.Arrays;
+import java.util.regex.*;  
+
 public class DataManager{  
 
     Connection conn;
@@ -206,33 +208,33 @@ public class DataManager{
     }
 
    public void deposit(String[] args){
-    if(args.length<3){
-        return; //not enough args
-    }
+        if(args.length<3){
+            return; //not enough args
+        }
 
-    String account_number=(args[1]);
-    String money = (args[2]);
-     money = money.replace("-", ""); //assume that user want positive
-    
-
-    if(isOwner(account_number)){
+        String account_number=(args[1]);
+        String money = (args[2]);
+        money = money.replace("-", ""); //assume that user want positive
         
-    }else{
-        System.out.println("You do not own account#: "+account_number);
-        return; 
-    }
+
+        if(isOwner(account_number)){
+            
+        }else{
+            System.out.println("You do not own account#: "+account_number);
+            return; 
+        }
 
 
-    String query= "UPDATE bank "+
-        "SET balance = balance +%s "+
-        "WHERE account_number='%s' ";        
+        String query= "UPDATE bank "+
+            "SET balance = balance +%.2f  "+
+            "WHERE account_number='%s' ";        
+
+            float fMoney = Float.parseFloat(money);
+            query = String.format(query,fMoney ,account_number);
+        execute(query);
 
         
-        query = String.format(query,money ,account_number);
-       execute(query);
-
-    
-   }
+    }
 
    
    public void withdraw(String[] args){
@@ -243,8 +245,10 @@ public class DataManager{
     String account_number=(args[1]);
     String money = (args[2]);
      money = money.replace("-", ""); //assume that user want positive
-    
+     
+     
    
+
     if(isOwner(account_number)){
         
     }else{
@@ -261,11 +265,12 @@ public class DataManager{
     }
 
     String query= "UPDATE bank "+
-        "SET balance = balance - %s "+
+        "SET balance = balance - %.2f "+
         "WHERE account_number='%s' ";        
 
         
-        query = String.format(query,money ,account_number);
+        //float fMoney = Float.parseFloat(money);
+        query = String.format(query,fMoney ,account_number);
        execute(query);
 
     
