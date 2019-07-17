@@ -36,7 +36,9 @@ public class Menu {
             case "clear":
                 clearScreen();
                 break;
-            
+            case "listaccounts":
+                listAccounts();
+                break;
             case "print":
                 printTable();
                 break;
@@ -89,6 +91,12 @@ public class Menu {
     public void deposit(String[] args){
         session.deposit(args);
     }
+
+
+    public void listAccounts(){
+        session.listAccounts();
+    }
+
 
     public void transfer(String[] args){
         session.transfer(args);

@@ -576,6 +576,42 @@ public class DataManager{
         
     }
 
+
+    public void listAccounts(){
+
+        String query = "select * from bank_owners where owner_id='%s';";
+        Statement stmt; 
+        try{
+            
+            stmt = conn.createStatement(); 
+            query  = String.format(query, this.id);
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            
+           
+            System.out.println("----------------------------------");
+            while (rs.next()) {
+                
+                
+                
+                String account_number = rs.getString("account_number");
+                System.out.println(account_number+" : "+  "\n");
+            }
+            System.out.println("----------------------------------");
+            stmt.close();
+            rs.close();
+
+        }catch(Exception  e){
+            System.err.format("ERROR: \n%s\n", e.getMessage());
+        }finally{
+            
+        }
+
+        
+    }
+
+
     public String login(String username,String password){
 
         String query = "select user_id from account where username='%s' and password='%s'"; //TODO change to prepared statment
