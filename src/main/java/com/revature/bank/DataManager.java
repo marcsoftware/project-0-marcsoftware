@@ -192,7 +192,7 @@ public class DataManager{
         if(max == "null"){
             max="0";
         }
-        int new_account_number=Integer.parseInt(max)+1003;
+        int new_account_number=Integer.parseInt(max)+101;
         
         query= "insert into bank(account_number,balance) values(%s,0) ";        
 
@@ -242,7 +242,17 @@ public class DataManager{
         }
 
 
-        String query= "UPDATE bank "+
+        //save tranaction to history
+        String query= "insert into history(name,type,amount) values('%s','%s','%s') ;";
+
+        query = String.format(query,this.username, "deposit" ,money);
+
+            
+            query = String.format(query,money ,account_number);
+        execute(query);
+
+        //
+         query= "UPDATE bank "+
             "SET balance = balance +%.2f  "+
             "WHERE account_number='%s' ";        
 
@@ -312,6 +322,17 @@ public class DataManager{
                 //float fMoney = Float.parseFloat(money);
                 query = String.format(query,fMoney ,account_number);
             execute(query);
+
+             //save tranaction to history
+         query= "insert into history(name,type,amount) values('%s','%s','%s') ;";
+
+        query = String.format(query,this.username, "withdraw" ,money);
+
+            
+            query = String.format(query,money ,account_number);
+        execute(query);
+
+        //
 
             return true;
         }
@@ -537,7 +558,7 @@ public class DataManager{
             
             ResultSet rs = stmt.executeQuery(query);
             //
-            System.out.println("----------------------------------");
+            
             while (rs.next()) {
                 String id = rs.getString("app_id");
                 
@@ -548,6 +569,7 @@ public class DataManager{
 
             stmt.close();
             
+            System.out.println("approved");
 
         }catch(Exception  e){
             System.err.format("ERROR: \n%s\n", e.getMessage());
@@ -555,7 +577,7 @@ public class DataManager{
             
         }
 
-        System.out.println("END---------------.");
+        
     }
 
     public void printApps(){
@@ -662,8 +684,6 @@ public class DataManager{
                   stringBuffer.append(String.format("%02x", bytes & 0xff));
               }
    
-           //   System.out.println("data:" + data);
-            //  System.out.println("digestedMD5(hex):" + stringBuffer.toString());
               password=stringBuffer.toString();
           } catch (NoSuchAlgorithmException exception) {
               // TODO Auto-generated catch block
@@ -874,6 +894,29 @@ public class DataManager{
     }
 
     public Boolean authenticate(String username,String password){
+
+        //
+        String data = password;
+          
+        MessageDigest messageDigest;
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(data.getBytes());
+            byte[] messageDigestMD5 = messageDigest.digest();
+            StringBuffer stringBuffer = new StringBuffer();
+            for (byte bytes : messageDigestMD5) {
+                stringBuffer.append(String.format("%02x", bytes & 0xff));
+            }
+ 
+            password=stringBuffer.toString();
+        } catch (NoSuchAlgorithmException exception) {
+            // TODO Auto-generated catch block
+            exception.printStackTrace();
+        }
+        //
+
+
+
         String query = "select user_id from account where username='%s' and password='%s'"; //TODO change to prepared statment
         query  = String.format(query, username,password);
         Statement stmt; 
