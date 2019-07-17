@@ -243,14 +243,10 @@ public class DataManager{
 
 
         //save tranaction to history
-        String query= "insert into history(name,type,amount) values('%s','%s','%s') ;";
+        String query= "insert into history(name,type,amount,account_number) values('%s','%s','%s','%s') ;";
 
-        query = String.format(query,this.username, "deposit" ,money);
-
-            
-            query = String.format(query,money ,account_number);
+        query = String.format(query,this.username, "deposit" ,money,account_number);
         execute(query);
-
         //
          query= "UPDATE bank "+
             "SET balance = balance +%.2f  "+
@@ -324,12 +320,12 @@ public class DataManager{
             execute(query);
 
              //save tranaction to history
-         query= "insert into history(name,type,amount) values('%s','%s','%s') ;";
+         query= "insert into history(name,type,amount,account_number) values('%s','%s','%s','%s') ;";
 
-        query = String.format(query,this.username, "withdraw" ,money);
+        query = String.format(query,this.username, "withdraw" ,money,account_number);
 
             
-            query = String.format(query,money ,account_number);
+            
         execute(query);
 
         //
