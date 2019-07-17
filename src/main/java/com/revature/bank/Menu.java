@@ -159,7 +159,7 @@ public class Menu {
             Scanner myObj = new Scanner(System.in);  
             System.out.print("Enter password: ");
             password = myObj.nextLine();  // Read user input
-            username=args[1];
+            
             
         }
         
@@ -217,8 +217,6 @@ public class Menu {
             Scanner myObj = new Scanner(System.in);  
             System.out.print("Enter desired password: ");
             password = myObj.nextLine();  // Read user input
-
-            username=args[1];
             
         }
         

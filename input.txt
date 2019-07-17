@@ -1,2 +1,10 @@
+login mario wrongpassword
 login mario mario
-apply 
+deposit 3003 1.11
+withdraw 3003 1.11
+transfer 3003 4006 1.11
+printapps
+approve 1
+listaccounts
+logout
+exit
