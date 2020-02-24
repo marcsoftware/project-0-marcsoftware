@@ -3,12 +3,14 @@ mimics banking function
 
 # HOW TO SETUP
 ```bash
- STEP ONE -   choco install postgresql
- STEP TWO - mvn install:install-file -Dfile=c:/db/postgresql-42.2.6.jar -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=42.2.6 -Dpackaging=jar
- STEP THREE - run src/resources/schema.sql
+// type the following commands
+choco install postgresql
+mvn install:install-file -Dfile=c:/db/postgresql-42.2.6.jar -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=42.2.6 -Dpackaging=jar
+run src/resources/schema.sql
 ```
 # HOW TO RUN
 ```bash
+// type the following commands
 mvn build
 mvn exec:java -Dexec.mainClass="com.revature.App"
 ```
