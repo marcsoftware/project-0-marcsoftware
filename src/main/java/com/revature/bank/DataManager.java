@@ -680,7 +680,7 @@ public class DataManager{
                   stringBuffer.append(String.format("%02x", bytes & 0xff));
               }
    
-              password=stringBuffer.toString();
+              // password=stringBuffer.toString(); // disbable passowrd hasing
           } catch (NoSuchAlgorithmException exception) {
               // TODO Auto-generated catch block
               exception.printStackTrace();
