@@ -4,9 +4,11 @@ mimics banking function
 # HOW TO SETUP
 ```bash
 // type the following commands
-choco install postgresql
+choco install postgresql  // and make user called 'postgres' with password 'none' or edit DataManager.java 
 mvn install:install-file -Dfile=c:/db/postgresql-42.2.6.jar -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=42.2.6 -Dpackaging=jar
 run src/resources/schema.sql
+
+// create user for psql and set 
 ```
 # HOW TO RUN
 ```bash
@@ -36,3 +38,4 @@ transfer               // transfer "transfer 1234 7865 50" , withdraw $50 from a
 exit                   // gently shutdown the program
 ```
 
+4e01ee046b9b4d898a867caea3cb39f0 
