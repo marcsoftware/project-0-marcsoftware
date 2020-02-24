@@ -7,7 +7,7 @@ CREATE TABLE account(
 );
 
 insert into account (user_id,username,password) values (0,'tomcruise','topgun');
-insert into account (user_id,username,password,status) values (0,'admin','21232f297a57a5a743894a0e4a801fc3','admin');
+insert into account (user_id,username,password,status) values (2,'admin','21232f297a57a5a743894a0e4a801fc3','admin');
 insert into account (user_id,username,password,status) values (1,'employee','21232f297a57a5a743894a0e4a801fc3','employee');
 
 CREATE TABLE applications (
