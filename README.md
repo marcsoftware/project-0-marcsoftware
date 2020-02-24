@@ -23,7 +23,7 @@ psql postgres postgres
 
 ### how to run Schema.sql
 ```bash 
-psql postgres     
+psql -U postgres     
 \i Schema.sql    
 ```
 # HOW TO RUN

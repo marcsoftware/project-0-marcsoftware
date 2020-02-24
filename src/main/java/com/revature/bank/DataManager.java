@@ -803,9 +803,9 @@ public class DataManager{
                 stringBuffer.append(String.format("%02x", bytes & 0xff));
             }
  
-         //   System.out.println("data:" + data);
-          //  System.out.println("digestedMD5(hex):" + stringBuffer.toString());
-            password=stringBuffer.toString();
+       
+            //password=stringBuffer.toString(); // this line hashed the password, but i comment it out
+            
         } catch (NoSuchAlgorithmException exception) {
             // TODO Auto-generated catch block
             exception.printStackTrace();

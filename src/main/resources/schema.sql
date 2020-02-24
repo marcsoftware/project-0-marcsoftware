@@ -9,8 +9,8 @@ CREATE TABLE account(
 );
 
 insert into account (user_id,username,password) values (0,'tomcruise','topgun');
-insert into account (user_id,username,password,status) values (2,'admin','5f4dcc3b5aa765d61d8327deb882cf99','admin');
-insert into account (user_id,username,password,status) values (1,'employee','5f4dcc3b5aa765d61d8327deb882cf99','employee');
+insert into account (user_id,username,password,status) values (2,'admin','password','admin');
+insert into account (user_id,username,password,status) values (1,'employee','password','employee');
 
 CREATE TABLE applications (
     
