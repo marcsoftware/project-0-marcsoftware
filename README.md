@@ -12,13 +12,13 @@ run src/resources/schema.sql
 // create user for psql and set 
 ```
 
-## how to change postgres password
+### how to change postgres password
 ```bash
 psql postgres postgres
 \password postgres
 ```
 
-## how to run Schema.sql
+### how to run Schema.sql
 ```bash 
 psql postgres     
 \i Schema.sql    
