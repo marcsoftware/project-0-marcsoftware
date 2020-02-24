@@ -31,6 +31,6 @@ deposit               // deposit money into account "deposit 1234 50" , deposits
 withdraw              // width draw money  "withdraw 1234 50", withdraw 50 dollars
 
 transfer              // transfer "transfer 1234 7865 50" , withdraw $50 from acct#1234 and put in acct#7865
-exit            // gently shutdown the program
+exit                  // gently shutdown the program
 ```
 
