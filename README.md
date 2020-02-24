@@ -29,7 +29,7 @@ psql postgres
 # HOW TO RUN
 ```bash
 // type the following commands
-mvn build
+mvn compile
 mvn exec:java -Dexec.mainClass="com.revature.App"
 ```
 # HOW to use program
