@@ -4,7 +4,7 @@ mimics banking function
 # HOW TO SETUP
 ```bash
 // type the following commands
-choco install postgresql  // and make user called 'postgres' with password 'none' or edit DataManager.java 
+choco install postgresql  // set password to 'none' during install or else edit DataManager.java to reflect your custom password
 mvn install:install-file -Dfile=c:/db/postgresql-42.2.6.jar -DgroupId=org.postgresql -DartifactId=postgresql -Dversion=42.2.6 -Dpackaging=jar
 run src/resources/schema.sql
 
